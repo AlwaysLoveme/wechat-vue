@@ -12,8 +12,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import routes from "@/f7routes";
+import App from "@/f7config/app";
+import { f7, f7ready } from "framework7-vue";
+import { defineComponent, onMounted } from "vue";
 import { Framework7Parameters } from "framework7/types";
 
 export default defineComponent({
@@ -34,6 +36,9 @@ export default defineComponent({
       },
     };
 
+    onMounted(() => {
+      f7ready(() => App.init(f7));
+    });
     return {
       params,
     };
