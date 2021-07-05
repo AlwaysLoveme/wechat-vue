@@ -1,8 +1,13 @@
 import qs from "qs";
 import store from "@/store";
 import { getWxUser } from "@/api/wx";
-import { Routes } from "@/typings/router";
+import { Router } from "framework7/types";
 import { stringifyUrl } from "@/shared/wx-config";
+
+interface RoutesExtend {
+  meta?: Record<string, unknown>;
+}
+export type Routes = Router.RouteParameters & RoutesExtend;
 
 const routes: Routes[] = [
   {
