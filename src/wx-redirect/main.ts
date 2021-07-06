@@ -19,6 +19,7 @@ if (code) {
   if (state === "/?")
     window.location.replace(`${base_url}/#/?code=${code}&url=${state}`);
   else {
+    // 微信授权尽量在首页就进行授权
     const url = decodeURIComponent(state as string);
     const redirectUrl = `${base_url}/#${url}${
       url.indexOf("?") !== -1 ? "&" : "?"
