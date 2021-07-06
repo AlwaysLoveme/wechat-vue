@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from "@/shared/axios";
 
-export function GetSignature({ url = "" }) {
+// get wechat sdk config
+export function GetSignature() {
   return axios({
     url: "/api",
     method: "GET",
     params: {
-      url,
+      url: window.location.href.split("#")[0],
     },
   });
 }
