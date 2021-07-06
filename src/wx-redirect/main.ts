@@ -1,4 +1,3 @@
-// && cpy ./public/auth.html ./dist/
 // 微信授权回调页
 function getUrlParam(name = "") {
   // 构造一个含有目标参数的正则表达式对象
