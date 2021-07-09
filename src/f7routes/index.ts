@@ -20,11 +20,10 @@ const routes: Routes[] = [
 ];
 
 routes.map((item) => {
-  item.on = {};
+  // 在此处处理授权跳转
   item.beforeEnter = async function ({ resolve, to }) {
-    document.title = item?.meta?.title as string;
-    if (process.env.NODE_ENV !== "development") {
-      const wxcode = stringifyUrl("code");
+    if (process.env.NODE_ENV === "production") {
+      const { code: wxcode } = to.query;
       if (wxcode) {
         window.sessionStorage.setItem("wxcode", wxcode as string);
       }
@@ -38,7 +37,6 @@ routes.map((item) => {
         }
         resolve();
       } else {
-        //const state = encodeURIComponent(path + "?" + queryParams);
         const origin = window.location.origin;
         const url = encodeURIComponent(decodeURIComponent(to.url)) // 防止原url携带的参数值有中文，先解码，再转码，
         window.location.href = `${origin}/redirect.html?state=${url}`;
@@ -47,5 +45,11 @@ routes.map((item) => {
       resolve();
     }
   };
+  
+  item.on = {};
+  // 动态设置页面title
+  item.on.pageAfterIn = () => {
+    document.title = item?.meta?.title as string;
+  }
 });
 export default routes;
