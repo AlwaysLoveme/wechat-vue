@@ -2,7 +2,6 @@ import qs from "qs";
 import store from "@/store";
 import { getWxUser } from "@/api/wx";
 import { Router } from "framework7/types";
-import { stringifyUrl } from "@/shared/wx-config";
 
 interface RoutesExtend {
   meta?: Record<string, unknown>;
