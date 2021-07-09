@@ -12,11 +12,16 @@ const request: AxiosInstance = axios.create({
   baseURL: process.env.BASE_HTTP,
   timeout: 20000,
   method: "POST",
+  // 此处允许get请求参数传递对象值 eg: const params = { user: {id: 1, name: 1}} axios.get('/api', {params})
+  paramsSerializer: function(params) {
+    return qs.stringify(params, { arrayFormat: 'indices' })
+  },
 });
 
 const handlerRequest = async (config: AxiosRequestConfig) => {
   showLoading();
-  if (!(config.data instanceof FormData) && config.method === "POST") {
+  // 默认content-type为formdata提交，所以此处针对post请求做参数序列化, 如果后台是以json方式接受参数，则去除此行代码
+  if (!(config.data instanceof FormData) && config.method === "post") {
     config.data = qs.stringify(config.data);
   }
   // eslint-disable-next-line no-prototype-builtins
