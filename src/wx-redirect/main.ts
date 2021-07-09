@@ -1,16 +1,5 @@
-// 微信授权回调页
-function getUrlParam(name = "") {
-  // 构造一个含有目标参数的正则表达式对象
-  const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  // 匹配目标参数
-  const r = window.location.search.substr(1).match(reg);
-  // 返回参数
-  if (r != null) {
-    return unescape(r[2]);
-  } else {
-    return null;
-  }
-}
+import { getUrlParam } from "@/shared/wx-config";
+
 const code = getUrlParam("code");
 const state = getUrlParam("state");
 const base_url = window.location.origin;
